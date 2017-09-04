@@ -1,0 +1,24 @@
+$navigation-color: red;
+$navigation-padding: 50px;
+
+@mixin border-radius($size) {
+  border-radius: $size;
+  -webkit-border-radius: $size;
+  -moz-border-radius: $size;
+  -ms-border-radius: $size;
+}
+
+#main-nav {
+  background-color: grey;
+  ul {
+    list-style: none;
+    li {
+      display: inline-block;
+      @include border-radius(3px);
+      a {
+        padding: $navigation-padding ($navigation-padding/2);
+        color: $navigation-color;
+      }
+    }
+  }
+}
