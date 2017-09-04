@@ -2,18 +2,34 @@ const gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	sourceMaps = require('gulp-sourcemaps'),
 	autoPrefixer = require('gulp-autoprefixer'),
-	cssMin = require('gulp-cssmin');
+	cssMin = require('gulp-cssmin')
 
-gulp.task('css', () => {
-	gulp.src('sass/style.scss')
-	.pipe(sourceMaps.init())
-	.pipe(sass().on('error', sass.logError))
-	.pipe(cssMin())
-	.pipe(autoPrefixer())
-	.pipe(sourceMaps.write())
-	.pipe(gulp.dest('./css'));
-});
+	// js required 
+	uglify = require('gulp-uglify');
 
-gulp.task('default', () => {
-	console.log('Let\'s process CSS styles')
-});
+	//CSS task
+	gulp.task('css', () => {
+		return gulp.src(['sass/style.scss'])
+		.pipe(sourceMaps.init())
+		.pipe(sass().on('error', sass.logError))
+		.pipe(cssMin())
+		.pipe(autoPrefixer())
+		.pipe(sourceMaps.write())
+		.pipe(gulp.dest('./css'));
+	});
+
+	// JS task
+	gulp.task('js', () => {
+		return gulp.src([
+			'./node_modules/jquery/dist/jquery.min.js',
+			'./src/js/admin.js',
+			'./src/js/magic.js'
+		])
+		.pipe(uglify())
+		.pipe(gulp.dest('./dist/js'))
+	});
+
+	// Default task
+	gulp.task('default', () => {
+		console.log('Let\'s process CSS styles')
+	});
