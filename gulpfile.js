@@ -29,7 +29,11 @@ const gulp = require('gulp'),
 		.pipe(gulp.dest('./dist/js'))
 	});
 
-	// Default task
-	gulp.task('default', () => {
-		console.log('Let\'s process CSS styles')
+	// watch task
+	gulp.task('watch', () => {
+		gulp.watch(['./src/sass/*.scss'], ['css']);
+		gulp.watch(['./src/js/*.js'], ['js']);
 	});
+
+	// Default task
+	gulp.task('default', ['css', 'js', 'watch']);
